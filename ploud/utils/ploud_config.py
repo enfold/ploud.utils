@@ -119,9 +119,12 @@ def initialized(ev):
         params = {}
         s = s.split('//', 1)[-1]
 
-        head, tail = s.split('@', 1)
-        user, passwd = head.split(':', 1)
-        host, dbname = tail.split('/', 1)
+        if '@' in s:
+            head, tail = s.split('@', 1)
+            user, passwd = head.split(':', 1)
+            host, dbname = tail.split('/', 1)
+        else:
+            user = passwd = host = dbname = ''
 
         params['user'] = user
         params['password'] = passwd
